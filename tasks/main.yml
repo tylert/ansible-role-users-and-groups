@@ -58,3 +58,28 @@
     user: '{{ item.user }}'  # required!!!
     validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: yes
   loop: '{{ delta_authorized_keys }}'
+
+# https://docs.ansible.com/ansible/latest/modules/copy_module.html
+- name: Configure sudoer(s)
+  blockinfile:
+    attributes: '{{ item.attributes | default(omit) }}'
+    backup: '{{ item.backup | default(omit) }}'  # default: no
+    block: '{{ item.block | default(omit) }}'
+    create: '{{ item.create | default(omit) }}'  # default: no
+    group: '{{ item.group | default(omit) }}'
+    insertafter: '{{ item.insertafter | default(omit) }}'  # default: EOF
+    insertbefore: '{{ item.insertbefore | default(omit) }}'  # default: BOF???
+    marker: '{{ item.marker | default(omit) }}'  # default: # {mark} ANSIBLE MANAGED BLOCK
+    marker_begin: '{{ item.marker_begin | default(omit) }}'  # default: BEGIN
+    marker_end: '{{ item.marker_end | default(omit) }}'  # default: END
+    mode: '{{ item.mode | default(omit) }}'
+    owner: '{{ item.owner | default(omit) }}'
+    path: '{{ item.path | default(omit) }}'  # required!!!
+    selevel: '{{ item.selevel | default(omit) }}'  # default: s0
+    serole: '{{ item.serole | default(omit) }}'
+    setype: '{{ item.setype | default(omit) }}'
+    seuser: '{{ item.seuser | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'  # default: present
+    unsafe_writes: '{{ item.unsafe_writes | default(omit) }}'  # default: no
+    validate: '{{ item.validate | default(omit) }}'
+  loop: '{{ delta_sudoers }}'

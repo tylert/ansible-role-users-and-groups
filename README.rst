@@ -32,7 +32,7 @@ vars.yml::
         force: yes
 
       - name: root
-        password: '!!'
+        password: '!'
         password_lock: yes
 
     delta_authorized_keys:
@@ -40,6 +40,19 @@ vars.yml::
       - user: blue
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
         exclusive: yes
+
+    delta_sudoers:
+
+      - block: |
+          Defaults:red !requiretty
+          red ALL=(ALL) NOPASSWD: ALL
+        path: /etc/sudoers.d/red
+        mode: '0440'
+
+      - block: |
+          green ALL=(ALL) NOPASSWD: ALL
+        path: /etc/sudoers.d/green
+        mode: '0440'
 
 ::
 
