@@ -59,7 +59,7 @@
     validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: yes
   loop: '{{ delta_authorized_keys }}'
 
-# https://docs.ansible.com/ansible/latest/modules/copy_module.html
+# https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html
 - name: Configure sudoer(s)
   blockinfile:
     attributes: '{{ item.attributes | default(omit) }}'
