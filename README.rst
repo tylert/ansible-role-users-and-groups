@@ -50,8 +50,13 @@ vars.yml::
         mode: '0440'
 
       - block: |
-          green ALL=(ALL) NOPASSWD: ALL
+          green ALL=(ALL) ALL
         path: /etc/sudoers.d/green
+        mode: '0440'
+
+      - block: |
+          red ALL=(ALL:ALL) ALL
+        path: /etc/sudoers.d/red
         mode: '0440'
 
 ::
