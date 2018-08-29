@@ -74,7 +74,7 @@
     marker_end: '{{ item.marker_end | default(omit) }}'  # default: END
     mode: '{{ item.mode | default(omit) }}'
     owner: '{{ item.owner | default(omit) }}'
-    path: '{{ item.path | default(omit) }}'  # required!!!
+    path: '{{ item.path }}'  # required!!!
     selevel: '{{ item.selevel | default(omit) }}'  # default: s0
     serole: '{{ item.serole | default(omit) }}'
     setype: '{{ item.setype | default(omit) }}'
