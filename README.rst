@@ -47,16 +47,19 @@ vars.yml::
           Defaults:red !requiretty
           red ALL=(ALL) NOPASSWD: ALL
         path: /etc/sudoers.d/red
+        create: yes
         mode: '0440'
 
       - block: |
           green ALL=(ALL) ALL
         path: /etc/sudoers.d/green
+        create: yes
         mode: '0440'
 
       - block: |
           red ALL=(ALL:ALL) ALL
         path: /etc/sudoers.d/red
+        create: yes
         mode: '0440'
 
 ::
@@ -64,3 +67,9 @@ vars.yml::
     ansible-playbook ... --extra-vars @vars.yml
 
 * https://github.com/ansible/ansible/pull/43131
+* https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html
+* https://raymii.org/s/tutorials/Ansible_-_Sudo_Safety_and_Sanity_Checks.html
+* https://serverfault.com/questions/901491/checking-sudoers-d-files-with-ansible
+* https://github.com/wtcross/ansible-sudoers/blob/master/tasks/main.yml
+* https://stackoverflow.com/a/41837196
+* https://leucos.github.io/ansible-files-layout
