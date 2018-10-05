@@ -1,4 +1,5 @@
-Ansible 2.6.3 (2.7.x!!!)
+Users and Groups Role
+=====================
 
 vars.yml::
 
@@ -64,7 +65,14 @@ vars.yml::
 
 ::
 
-    ansible-playbook ... --extra-vars @vars.yml
+    ansible-playbook --become -i 10.0.0.1, start.yml \
+        --extra-vars=ansible_user=bob \
+        --extra-vars @vars.yml
+
+    ansible localhost --user=bob -m import_tasks \
+        -a ansible-role-users-and-groups/tasks/main.yml \
+        --extra-vars @ansible-role-users-and-groups/defaults/main.yml \
+        --extra-vars @vars.yml
 
 * https://github.com/ansible/ansible/pull/43131
 * https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html
