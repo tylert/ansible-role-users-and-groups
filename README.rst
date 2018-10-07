@@ -36,6 +36,15 @@ vars.yml::
         password: '!'
         password_lock: yes
 
+      - name: debianadmin
+        groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,video
+
+      - name: ubuntuadmin
+        groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,video
+
+      - name: antergosadmin
+        groups: users,wheel
+
     delta_authorized_keys:
 
       - user: blue
