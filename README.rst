@@ -90,11 +90,11 @@ my_vars.yml::
         --extra-vars @defaults/main.yml \
         --extra-vars @my_vars.yml
 
-    ansible all -i server, --become -m import_tasks \
+    ansible all -i server, --become --ask-pass -m import_tasks \
         -a tasks/main.yml \
         --extra-vars @defaults/main.yml \
         --extra-vars @my_vars.yml \
-        --extra-vars 'ansible_user=armpit ansible_password=eatmyshorts'
+        --extra-vars 'ansible_user=armpit'
 
 * https://github.com/ansible/ansible/pull/43131
 * https://github.com/ansible/ansible/issues/46334
