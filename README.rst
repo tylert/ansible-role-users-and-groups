@@ -37,10 +37,13 @@ vars.yml::
         password_lock: yes
 
       - name: debianadmin
-        groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,video
+        groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
 
       - name: ubuntuadmin
-        groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,video
+        groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,users,video
+
+      - name: raspbianadmin
+        groups: adm,audio,cdrom,dialout,dip,games,gpio,i2c,input,lpadmin,netdev,plugdev,spi,sudo,users,video
 
       - name: antergosadmin
         groups: users,wheel
