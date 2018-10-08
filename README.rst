@@ -58,6 +58,10 @@ my_vars.yml::
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
         exclusive: yes
 
+      - user: red
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
+        state: absent
+
     delta_sudoers:
 
       - block: |
@@ -79,7 +83,7 @@ my_vars.yml::
         create: yes
         mode: '0440'
 
-::
+Examples::
 
     ansible-playbook --become -i 10.0.0.1, start.yml \
         --extra-vars=ansible_user=bob \
@@ -98,8 +102,8 @@ my_vars.yml::
 
 * https://github.com/ansible/ansible/pull/43131
 * https://github.com/ansible/ansible/issues/46334
-* https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html
-* https://raymii.org/s/tutorials/Ansible_-_Sudo_Safety_and_Sanity_Checks.html
+* `https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html`
+* `https://raymii.org/s/tutorials/Ansible_-_Sudo_Safety_and_Sanity_Checks.html`
 * https://serverfault.com/questions/901491/checking-sudoers-d-files-with-ansible
 * https://github.com/wtcross/ansible-sudoers/blob/master/tasks/main.yml
 * https://stackoverflow.com/a/41837196
