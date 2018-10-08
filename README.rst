@@ -1,7 +1,7 @@
 Users and Groups Role
 =====================
 
-vars.yml::
+my_vars.yml::
 
     ---
 
@@ -36,17 +36,21 @@ vars.yml::
         password: '!'
         password_lock: yes
 
-      - name: debianadmin
-        groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
+      # - name: debianadmin
+      #   groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
+      # ...
 
-      - name: ubuntuadmin
-        groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,users,video
+      # - name: ubuntuadmin
+      #   groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,users,video
+      # ...
 
-      - name: raspbianadmin
-        groups: adm,audio,cdrom,dialout,dip,games,gpio,i2c,input,lpadmin,netdev,plugdev,spi,sudo,users,video
+      # - name: raspbianadmin
+      #   groups: adm,audio,cdrom,dialout,dip,games,gpio,i2c,input,lpadmin,netdev,plugdev,spi,sudo,users,video
+      # ...
 
-      - name: antergosadmin
-        groups: users,wheel
+      # - name: antergosadmin
+      #   groups: users,wheel
+      # ...
 
     delta_authorized_keys:
 
@@ -79,14 +83,21 @@ vars.yml::
 
     ansible-playbook --become -i 10.0.0.1, start.yml \
         --extra-vars=ansible_user=bob \
-        --extra-vars @vars.yml
+        --extra-vars @my_vars.yml
 
     ansible localhost --user=bob -m import_tasks \
-        -a ansible-role-users-and-groups/tasks/main.yml \
-        --extra-vars @ansible-role-users-and-groups/defaults/main.yml \
-        --extra-vars @vars.yml
+        -a tasks/main.yml \
+        --extra-vars @defaults/main.yml \
+        --extra-vars @my_vars.yml
+
+    ansible all -i server, --become -m import_tasks \
+        -a tasks/main.yml \
+        --extra-vars @defaults/main.yml \
+        --extra-vars @my_vars.yml \
+        --extra-vars 'ansible_user=armpit ansible_password=eatmyshorts'
 
 * https://github.com/ansible/ansible/pull/43131
+* https://github.com/ansible/ansible/issues/46334
 * https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html
 * https://raymii.org/s/tutorials/Ansible_-_Sudo_Safety_and_Sanity_Checks.html
 * https://serverfault.com/questions/901491/checking-sudoers-d-files-with-ansible
