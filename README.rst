@@ -70,18 +70,21 @@ my_vars.yml::
         path: /etc/sudoers.d/red
         create: yes
         mode: '0440'
+        validate: visudo --quiet --check --file=/etc/sudoers.d/red
 
       - block: |
           green ALL=(ALL) ALL
         path: /etc/sudoers.d/green
         create: yes
         mode: '0440'
+        validate: visudo --quiet --check --file=/etc/sudoers.d/green
 
       - block: |
-          red ALL=(ALL:ALL) ALL
-        path: /etc/sudoers.d/red
+          blue ALL=(ALL:ALL) ALL
+        path: /etc/sudoers.d/blue
         create: yes
         mode: '0440'
+        validate: visudo --quiet --check --file=/etc/sudoers.d/blue
 
 Examples::
 
@@ -89,16 +92,18 @@ Examples::
         --extra-vars=ansible_user=bob \
         --extra-vars @my_vars.yml
 
-    ansible localhost --user=bob -m import_tasks \
-        -a tasks/main.yml \
-        --extra-vars @defaults/main.yml \
-        --extra-vars @my_vars.yml
+    ansible localhost --user=bob \
+        --module-name=import_tasks \
+        --args=tasks/main.yml \
+        --extra-vars=@defaults/main.yml \
+        --extra-vars=@my_vars.yml
 
-    ansible all -i server, --become --ask-pass -m import_tasks \
-        -a tasks/main.yml \
-        --extra-vars @defaults/main.yml \
-        --extra-vars @my_vars.yml \
-        --extra-vars 'ansible_user=armpit'
+    ansible all --inventory server, --become --ask-pass \
+        --module-name=import_tasks \
+        --args=tasks/main.yml \
+        --extra-vars=@defaults/main.yml \
+        --extra-vars=@my_vars.yml \
+        --extra-vars='ansible_user=armpit'
 
 * https://github.com/ansible/ansible/pull/43131
 * https://github.com/ansible/ansible/issues/46334
