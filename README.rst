@@ -106,7 +106,6 @@ Examples::
         --extra-vars='ansible_user=armpit'
 
 * https://github.com/ansible/ansible/pull/43131
-* https://github.com/ansible/ansible/issues/46334
 * `https://raymii.org/s/tutorials/Ansible_-_Only_if_a_file_exists_or_does_not_exist.html`
 * `https://raymii.org/s/tutorials/Ansible_-_Sudo_Safety_and_Sanity_Checks.html`
 * https://serverfault.com/questions/901491/checking-sudoers-d-files-with-ansible
