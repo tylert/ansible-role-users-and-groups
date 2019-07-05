@@ -48,7 +48,7 @@ my_vars.yml::
       #   groups: adm,audio,cdrom,dialout,dip,games,gpio,i2c,input,lpadmin,netdev,plugdev,spi,sudo,users,video
       # ...
 
-      # - name: antergosadmin
+      # - name: archadmin
       #   groups: users,wheel
       # ...
 
