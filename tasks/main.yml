@@ -9,6 +9,7 @@
     state: '{{ item.state | default(omit) }}'  # default: present
     system: '{{ item.system | default(omit) }}'  # default: no
   loop: '{{ delta_groups }}'
+  when: ansible_system is match('Linux')
 
 # https://docs.ansible.com/ansible/latest/modules/user_module.html
 - name: Configure user(s)
@@ -44,6 +45,7 @@
     uid: '{{ item.uid | default(omit) }}'
     update_password: '{{ item.update_password | default(omit) }}'  # default: always
   loop: '{{ delta_users }}'
+  when: ansible_system is match('Linux')
 
 # https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html
 - name: Configure authorized key(s)
@@ -59,6 +61,7 @@
     user: '{{ item.user }}'  # required!!!
     validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: yes
   loop: '{{ delta_authorized_keys }}'
+  when: ansible_system is match('Linux')
 
 # https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html
 - name: Configure sudoer(s)
@@ -84,3 +87,4 @@
     unsafe_writes: '{{ item.unsafe_writes | default(omit) }}'  # default: no
     validate: '{{ item.validate | default(omit) }}'
   loop: '{{ delta_sudoers }}'
+  when: ansible_system is match('Linux')
