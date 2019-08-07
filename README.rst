@@ -70,14 +70,14 @@ my_vars.yml::
       path: /etc/sudoers.d/red
       create: yes
       mode: '0440'
-      validate: visudo --quiet --check --file=/etc/sudoers.d/red
+      validate: visudo --quiet --check --file=%s
 
     - block: |
         green ALL=(ALL) ALL
       path: /etc/sudoers.d/green
       create: yes
       mode: '0440'
-      validate: visudo -q -c -f /etc/sudoers.d/blue
+      validate: visudo -q -c -f %s
 
     - block: |
         blue ALL=(ALL:ALL) ALL
