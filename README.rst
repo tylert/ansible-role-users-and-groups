@@ -110,7 +110,7 @@ Examples::
         --extra-vars=ansible_password=armpit
         --extra-vars=@my_vars.yml \
         --inventory=10.0.0.1, \
-        --module-name=import_tasks \
+        --module-name=include_tasks \
         --user=root
 
 * https://github.com/ansible/ansible/pull/43131
