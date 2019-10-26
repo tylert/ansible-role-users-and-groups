@@ -66,7 +66,7 @@ my_vars.yml::
 
     - block: |
         Defaults:red !requiretty
-        red ALL=(ALL) NOPASSWD: ALL
+        red ALL=(ALL) NOPASSWD:ALL
       path: /etc/sudoers.d/red
       create: yes
       mode: '0440'
