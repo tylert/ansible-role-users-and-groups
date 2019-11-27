@@ -6,6 +6,7 @@
     gid: '{{ item.gid | default(omit) }}'
     local: '{{ item.local | default(omit) }}'  # default: no
     name: '{{ item.name }}'  # required!!!
+    non_unique: '{{ item.non_unique | default(omit) }}'  # default: no
     state: '{{ item.state | default(omit) }}'  # default: present
     system: '{{ item.system | default(omit) }}'  # default: no
   loop: '{{ delta_groups }}'
@@ -14,6 +15,7 @@
 - name: Configure user(s)
   user:
     append: '{{ item.append | default(omit) }}'  # default: no
+    authorization: '{{ item.authorization | default(omit) }}'
     comment: '{{ item.comment | default(omit) }}'
     create_home: '{{ item.create_home | default(omit) }}'  # default: yes
     expires: '{{ item.expires | default(omit) }}'
@@ -30,7 +32,9 @@
     non_unique: '{{ item.non_unique | default(omit) }}'  # default: no
     password: '{{ item.password | default(omit) }}'
     password_lock: '{{ item.password_lock | default(omit) }}'  # default: no???
+    profile: '{{ item.profile | default(omit) }}'
     remove: '{{ item.remove | default(omit) }}'  # default: no
+    role: '{{ item.role | default(omit) }}'
     seuser: '{{ item.seuser | default(omit) }}'
     shell: '{{ item.shell | default(omit) }}'
     skeleton: '{{ item.skeleton | default(omit) }}'  # requires create_home
