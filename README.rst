@@ -45,7 +45,7 @@ my_vars.yml::
     # ...
 
     # - name: raspbianadmin
-    #   groups: adm,audio,cdrom,dialout,dip,games,gpio,i2c,input,lpadmin,netdev,plugdev,spi,sudo,users,video
+    #   groups: adm,audio,cdrom,dialout,games,gpio,i2c,input,netdev,plugdev,spi,sudo,users,video
     # ...
 
     # - name: archadmin
