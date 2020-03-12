@@ -69,7 +69,7 @@
   blockinfile:
     attributes: '{{ item.attributes | default(omit) }}'
     backup: '{{ item.backup | default(omit) }}'  # default: no
-    block: '{{ item.block | default(omit) }}'
+    block: '{{ item.block | default(omit) }}'  # default: empty string
     create: '{{ item.create | default(omit) }}'  # default: no
     group: '{{ item.group | default(omit) }}'
     insertafter: '{{ item.insertafter | default(omit) }}'  # default: EOF
