@@ -1,6 +1,6 @@
 ---
 
-# https://docs.ansible.com/ansible/latest/modules/group_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
 - name: Configure group(s)
   group:
     gid: '{{ item.gid | default(omit) }}'
@@ -11,7 +11,7 @@
     system: '{{ item.system | default(omit) }}'  # default: no
   loop: '{{ delta_groups }}'
 
-# https://docs.ansible.com/ansible/latest/modules/user_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
 - name: Configure user(s)
   user:
     append: '{{ item.append | default(omit) }}'  # default: no
@@ -49,7 +49,8 @@
     update_password: '{{ item.update_password | default(omit) }}'  # default: always
   loop: '{{ delta_users }}'
 
-# https://docs.ansible.com/ansible/latest/modules/authorized_key_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html
+# ansible.posix.authorized_key: XXX TODO FIXME WTF
 - name: Configure authorized key(s)
   authorized_key:
     comment: '{{ item.comment | default(omit) }}'
@@ -64,7 +65,7 @@
     validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: yes
   loop: '{{ delta_authorized_keys }}'
 
-# https://docs.ansible.com/ansible/latest/modules/blockinfile_module.html
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/blockinfile_module.html
 - name: Configure sudoer(s)
   blockinfile:
     attributes: '{{ item.attributes | default(omit) }}'
