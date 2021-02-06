@@ -1,6 +1,7 @@
 ---
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
+# ansible.builtin.group
 - name: Configure group(s)
   group:
     gid: '{{ item.gid | default(omit) }}'
@@ -12,6 +13,7 @@
   loop: '{{ delta_groups }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+# ansible.builtin.user
 - name: Configure user(s)
   user:
     append: '{{ item.append | default(omit) }}'  # default: no
@@ -66,6 +68,7 @@
   loop: '{{ delta_authorized_keys }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/blockinfile_module.html
+# ansible.builtin.blockinfile
 - name: Configure sudoer(s)
   blockinfile:
     attributes: '{{ item.attributes | default(omit) }}'
