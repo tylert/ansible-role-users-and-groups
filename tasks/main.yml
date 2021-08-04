@@ -1,9 +1,8 @@
 ---
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
-# ansible.builtin.group
 - name: Configure group(s)
-  group:
+  ansible.builtin.group:
     gid: '{{ item.gid | default(omit) }}'
     local: '{{ item.local | default(omit) }}'  # default: no
     name: '{{ item.name }}'  # required!!!
@@ -13,9 +12,8 @@
   loop: '{{ delta_groups }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
-# ansible.builtin.user
 - name: Configure user(s)
-  user:
+  ansible.builtin.user:
     append: '{{ item.append | default(omit) }}'  # default: no
     authorization: '{{ item.authorization | default(omit) }}'
     comment: '{{ item.comment | default(omit) }}'
@@ -33,6 +31,8 @@
     name: '{{ item.name }}'  # required!!!
     non_unique: '{{ item.non_unique | default(omit) }}'  # default: no
     password: '{{ item.password | default(omit) }}'
+    password_expire_max: '{{ item.password_expire_max | default(omit) }}'
+    password_expire_min: '{{ item.password_expire_min | default(omit) }}'
     password_lock: '{{ item.password_lock | default(omit) }}'  # default: no???
     profile: '{{ item.profile | default(omit) }}'
     remove: '{{ item.remove | default(omit) }}'  # default: no
@@ -52,9 +52,8 @@
   loop: '{{ delta_users }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html
-# ansible.posix.authorized_key: XXX TODO FIXME WTF
 - name: Configure authorized key(s)
-  authorized_key:
+  ansible.posix.authorized_key:
     comment: '{{ item.comment | default(omit) }}'
     exclusive: '{{ item.exclusive | default(omit) }}'  # default: no
     follow: '{{ item.follow | default(omit) }}'  # default: no
@@ -68,9 +67,8 @@
   loop: '{{ delta_authorized_keys }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/blockinfile_module.html
-# ansible.builtin.blockinfile
 - name: Configure sudoer(s)
-  blockinfile:
+  ansible.builtin.blockinfile:
     attributes: '{{ item.attributes | default(omit) }}'
     backup: '{{ item.backup | default(omit) }}'  # default: no
     block: '{{ item.block | default(omit) }}'  # default: empty string
