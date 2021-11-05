@@ -7,14 +7,9 @@ my_vars.yml::
 
     delta_groups:
 
-    - name: blue
-      gid: 1000
-
-    - name: colours
-      system: yes
-
-    - name: shades
-      state: absent
+    - { name: blue, gid: 1000 }
+    - { name: colours, system: yes }
+    - { name: shades, state: absent }
 
     delta_users:
 
