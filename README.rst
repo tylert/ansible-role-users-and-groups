@@ -7,29 +7,28 @@ my_vars.yml::
 
     delta_groups:
 
-    - { name: blue, gid: 1000 }
-    - { name: colours, system: yes }
-    - { name: shades, state: absent }
+      - name: pink
+
+      - { name: blue, gid: 1000 }
+      - { name: colours, system: yes }
+      - { name: shades, state: absent }
 
     delta_users:
 
-    - name: blue
-      comment: Blue User,,,  # GECOS info
-      group: blue
-      groups: colours,users,sudo
-      uid: 1000
+      - name: blue
+        comment: Blue User,,,  # GECOS info
+        group: blue
+        groups: colours,users,sudo
+        uid: 1000
 
-    - name: placeholder
-      create_home: no
+      - name: placeholder
+        create_home: no
 
-    - name: yellow
-      state: absent
-      remove: yes
-      force: yes
+      - { name: yellow, state: absent, remove: yes, force: yes }
 
-    - name: root
-      password: '!'
-      password_lock: yes
+      - name: root
+        password: '!'
+        password_lock: yes
 
     # - name: debianadmin
     #   groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
@@ -49,36 +48,36 @@ my_vars.yml::
 
     delta_authorized_keys:
 
-    - user: blue
-      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
-      exclusive: yes
+      - user: blue
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
+        exclusive: yes
 
-    - user: red
-      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
-      state: absent
+      - user: red
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
+        state: absent
 
     delta_sudoers:
 
-    - block: |
-        Defaults:red !requiretty
-        red ALL=(ALL) NOPASSWD:ALL
-      path: /etc/sudoers.d/red
-      create: yes
-      mode: '0440'
-      validate: visudo --quiet --check --file=%s
+      - block: |
+          Defaults:red !requiretty
+          red ALL=(ALL) NOPASSWD:ALL
+        path: /etc/sudoers.d/red
+        create: yes
+        mode: '0440'
+        validate: visudo --quiet --check --file=%s
 
-    - block: |
-        green ALL=(ALL) ALL
-      path: /etc/sudoers.d/green
-      create: yes
-      mode: '0440'
-      validate: visudo -q -c -f %s
+      - block: |
+          green ALL=(ALL) ALL
+        path: /etc/sudoers.d/green
+        create: yes
+        mode: '0440'
+        validate: visudo -q -c -f %s
 
-    - block: |
-        blue ALL=(ALL:ALL) ALL
-      path: /etc/sudoers.d/blue
-      create: yes
-      mode: '0440'
+      - block: |
+          blue ALL=(ALL:ALL) ALL
+        path: /etc/sudoers.d/blue
+        create: yes
+        mode: '0440'
 
 Examples::
 
