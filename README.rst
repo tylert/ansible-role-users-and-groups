@@ -1,8 +1,9 @@
 Users and Groups Role
 =====================
 
-my_vars.yml::
+Variables::
 
+    %YAML 1.2
     ---
 
     delta_groups:
