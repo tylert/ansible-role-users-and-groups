@@ -90,3 +90,9 @@
     unsafe_writes: '{{ item.unsafe_writes | default(omit) }}'  # default: no
     validate: '{{ item.validate | default(omit) }}'
   loop: '{{ delta_sudoers }}'
+
+# XXX FIXME TODO
+# https://docs.ansible.com/ansible/latest/collections/community/general/sudoers_module.html
+
+# XXX FIXME TODO
+# https://docs.ansible.com/ansible/latest/collections/community/general/ssh_config_module.html
