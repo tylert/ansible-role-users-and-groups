@@ -10,17 +10,22 @@ Variables::
 
       - name: pink
 
-      - { name: blue, gid: 1000 }
+      - { name: blue, gid: '1999' }
       - { name: colours, system: yes }
       - { name: shades, state: absent }
 
     delta_users:
 
       - name: blue
-        comment: Blue User,,,  # GECOS info
         group: blue
         groups: colours,users,sudo
-        uid: 1000
+        comment: Blue User,,,  # GECOS info
+        uid: '1999'
+
+      - name: purple
+        group: purple
+        groups: colours
+        password: $6$asdfasdf$...
 
       - name: placeholder
         create_home: no
@@ -28,7 +33,7 @@ Variables::
       - { name: yellow, state: absent, remove: yes, force: yes }
 
       - name: root
-        password: '!'
+        password: '!*'
         password_lock: yes
 
     # - name: debianadmin
@@ -59,24 +64,31 @@ Variables::
 
     delta_sudoers:
 
-      - block: |
+      - path: /etc/sudoers.d/red
+        block: |
           Defaults:red !requiretty
           red ALL=(ALL) NOPASSWD:ALL
-        path: /etc/sudoers.d/red
         create: yes
         mode: '0440'
         validate: visudo --quiet --check --file=%s
 
-      - block: |
+      - path: /etc/sudoers.d/green
+        block: |
           green ALL=(ALL) ALL
-        path: /etc/sudoers.d/green
         create: yes
         mode: '0440'
         validate: visudo -q -c -f %s
 
-      - block: |
+      - path: /etc/sudoers.d/blue
+        block: |
           blue ALL=(ALL:ALL) ALL
-        path: /etc/sudoers.d/blue
+        create: yes
+        mode: '0440'
+
+      - path: /etc/sudoers.d/purple
+        block: |
+          purple ALL=(ALL:ALL) ALL
+          purple ALL=NOPASSWD: /usr/bin/foo
         create: yes
         mode: '0440'
 
