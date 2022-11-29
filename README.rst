@@ -98,24 +98,24 @@ Examples::
     ansible-playbook \
         --ask-become-pass \
         --become \
-        --extra-vars=@my_vars.yml \
+        --extra-vars=@my_vars.yaml \
         --inventory=inventories/staging/ \
         --user=bob \
-        start.yml
+        start.yaml
 
     # Ad-hoc with SSH key
     ansible localhost \
-        --args=tasks/main.yml \
-        --extra-vars=@my_vars.yml
+        --args=tasks/main.yaml \
+        --extra-vars=@my_vars.yaml
         --key-file=~/.ssh/id_rsa_foo \
         --module-name=import_tasks \
         --user=bob
 
     # Ad-hoc without SSH key
     ansible all \
-        --args=tasks/main.yml \
+        --args=tasks/main.yaml \
         --extra-vars=ansible_password=armpit
-        --extra-vars=@my_vars.yml \
+        --extra-vars=@my_vars.yaml \
         --inventory=10.0.0.1, \
         --module-name=include_tasks \
         --user=root
