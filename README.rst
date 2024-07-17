@@ -1,69 +1,55 @@
 Users and Groups Role
 =====================
 
-Variables::
-
-    %YAML 1.2
-    ---
+YAML examples::
 
     delta_groups:
-
       - name: pink
-
       - { name: blue, gid: '1999' }
       - { name: colours, system: true }
       - { name: shades, state: absent }
 
     delta_users:
-
       - name: blue
         group: blue
         groups: colours,users,sudo
         comment: Blue User,,,  # GECOS info
         uid: '1999'
-
       - name: purple
         group: purple
         groups: colours
-        password: $6$asdfasdf$...
-
+        password: $6$asdfasdf$...  # password hash
       - name: placeholder
         create_home: false
-
       - { name: yellow, state: absent, remove: true, force: true }
-
       - name: root
         password: '!*'
         password_lock: true
-
-    # - name: debianadmin
-    #   groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
-    # ...
-
-    # - name: ubuntuadmin
-    #   groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,users,video
-    # ...
-
-    # - name: raspbianadmin
-    #   groups: adm,audio,cdrom,dialout,games,gpio,i2c,input,netdev,plugdev,spi,sudo,users,video
-    # ...
-
-    # - name: archadmin
-    #   groups: users,wheel
-    # ...
+      - name: eddie   # EndeavourOS admin
+        group: eddie
+        groups: rfkill,sys,wheel
+      - name: archie  # Arch Linux admin
+        group: archie
+        groups: users,wheel
+      - name: debbie  # Debian admin
+        group: debbie
+        groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
+      - name: pi      # Raspberry Pi OS admin
+        group: pi
+        groups: adm,audio,cdrom,dialout,games,gpio,i2c,input,netdev,plugdev,spi,sudo,users,video
+      - name: booboo  # Ubuntu admin
+        group: booboo
+        groups: adm,cdrom,dialout,dip,fax,floppy,lpadmin,plugdev,sambashare,tape,users,video
 
     delta_authorized_keys:
-
       - user: blue
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
+        key: ssh-ed25519 AAAAB3NzaC1yc2EAAAADAQ...  # SSH public key
         exclusive: true
-
       - user: red
-        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...  # SSH public key
         state: absent
 
     delta_sudoers:
-
       - path: /etc/sudoers.d/red
         block: |
           Defaults:red !requiretty
@@ -71,20 +57,17 @@ Variables::
         create: true
         mode: '0440'
         validate: visudo --quiet --check --file=%s
-
       - path: /etc/sudoers.d/green
         block: |
           green ALL=(ALL) ALL
         create: true
         mode: '0440'
         validate: visudo -q -c -f %s
-
       - path: /etc/sudoers.d/blue
         block: |
           blue ALL=(ALL:ALL) ALL
         create: true
         mode: '0440'
-
       - path: /etc/sudoers.d/purple
         block: |
           purple ALL=(ALL:ALL) ALL
@@ -92,7 +75,7 @@ Variables::
         create: true
         mode: '0440'
 
-Examples::
+CLI examples::
 
     # Playbook
     ansible-playbook \
