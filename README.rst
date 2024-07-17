@@ -11,7 +11,7 @@ Variables::
       - name: pink
 
       - { name: blue, gid: '1999' }
-      - { name: colours, system: yes }
+      - { name: colours, system: true }
       - { name: shades, state: absent }
 
     delta_users:
@@ -28,13 +28,13 @@ Variables::
         password: $6$asdfasdf$...
 
       - name: placeholder
-        create_home: no
+        create_home: false
 
-      - { name: yellow, state: absent, remove: yes, force: yes }
+      - { name: yellow, state: absent, remove: true, force: true }
 
       - name: root
         password: '!*'
-        password_lock: yes
+        password_lock: true
 
     # - name: debianadmin
     #   groups: audio,bluetooth,cdrom,dip,floppy,lpadmin,netdev,plugdev,scanner,users,video
@@ -56,7 +56,7 @@ Variables::
 
       - user: blue
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
-        exclusive: yes
+        exclusive: true
 
       - user: red
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...
@@ -68,28 +68,28 @@ Variables::
         block: |
           Defaults:red !requiretty
           red ALL=(ALL) NOPASSWD:ALL
-        create: yes
+        create: true
         mode: '0440'
         validate: visudo --quiet --check --file=%s
 
       - path: /etc/sudoers.d/green
         block: |
           green ALL=(ALL) ALL
-        create: yes
+        create: true
         mode: '0440'
         validate: visudo -q -c -f %s
 
       - path: /etc/sudoers.d/blue
         block: |
           blue ALL=(ALL:ALL) ALL
-        create: yes
+        create: true
         mode: '0440'
 
       - path: /etc/sudoers.d/purple
         block: |
           purple ALL=(ALL:ALL) ALL
           purple ALL=NOPASSWD: /usr/bin/foo
-        create: yes
+        create: true
         mode: '0440'
 
 Examples::

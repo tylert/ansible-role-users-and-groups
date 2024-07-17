@@ -3,39 +3,41 @@
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html
 - name: Configure group(s)
   ansible.builtin.group:
+    force: '{{ item.force | default(omit) }}'  # default: false
     gid: '{{ item.gid | default(omit) }}'
-    local: '{{ item.local | default(omit) }}'  # default: no
+    local: '{{ item.local | default(omit) }}'  # default: false
     name: '{{ item.name }}'  # required!!!
-    non_unique: '{{ item.non_unique | default(omit) }}'  # default: no
+    non_unique: '{{ item.non_unique | default(omit) }}'  # default: false
     state: '{{ item.state | default(omit) }}'  # default: present
-    system: '{{ item.system | default(omit) }}'  # default: no
+    system: '{{ item.system | default(omit) }}'  # default: false
   loop: '{{ delta_groups }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
 - name: Configure user(s)
   ansible.builtin.user:
-    append: '{{ item.append | default(omit) }}'  # default: no
+    append: '{{ item.append | default(omit) }}'  # default: false
     authorization: '{{ item.authorization | default(omit) }}'
     comment: '{{ item.comment | default(omit) }}'
-    create_home: '{{ item.create_home | default(omit) }}'  # default: yes
+    create_home: '{{ item.create_home | default(omit) }}'  # default: true
     expires: '{{ item.expires | default(omit) }}'
-    force: '{{ item.force | default(omit) }}'  # default: no
-    generate_ssh_key: '{{ item.generate_ssh_key | default(omit) }}'  # default: no
+    force: '{{ item.force | default(omit) }}'  # default: false
+    generate_ssh_key: '{{ item.generate_ssh_key | default(omit) }}'  # default: false
     group: '{{ item.group | default(omit) }}'
     groups: '{{ item.groups | default(omit) }}'
     hidden: '{{ item.hidden | default(omit) }}'  # default: yes, if system
     home: '{{ item.home | default(omit) }}'
-    local: '{{ item.local | default(omit) }}'  # default: no
+    local: '{{ item.local | default(omit) }}'  # default: false
     login_class: '{{ item.login_class | default(omit) }}'
-    move_home: '{{ item.move_home | default(omit) }}'  # default: no
+    move_home: '{{ item.move_home | default(omit) }}'  # default: false
     name: '{{ item.name }}'  # required!!!
-    non_unique: '{{ item.non_unique | default(omit) }}'  # default: no
+    non_unique: '{{ item.non_unique | default(omit) }}'  # default: false
     password: '{{ item.password | default(omit) }}'
     password_expire_max: '{{ item.password_expire_max | default(omit) }}'
     password_expire_min: '{{ item.password_expire_min | default(omit) }}'
-    password_lock: '{{ item.password_lock | default(omit) }}'  # default: no???
+    password_expire_warn: '{{ item.password_expire_warn | default(omit) }}'
+    password_lock: '{{ item.password_lock | default(omit) }}'  # default: false???
     profile: '{{ item.profile | default(omit) }}'
-    remove: '{{ item.remove | default(omit) }}'  # default: no
+    remove: '{{ item.remove | default(omit) }}'  # default: false
     role: '{{ item.role | default(omit) }}'
     seuser: '{{ item.seuser | default(omit) }}'
     shell: '{{ item.shell | default(omit) }}'
@@ -46,8 +48,9 @@
     ssh_key_passphrase: '{{ item.ssh_key_passphrase | default(omit) }}'
     ssh_key_type: '{{ item.ssh_key_type | default(omit) }}'  # default: rsa
     state: '{{ item.state | default(omit) }}'  # default: present
-    system: '{{ item.system | default(omit) }}'  # default: no
+    system: '{{ item.system | default(omit) }}'  # default: false
     uid: '{{ item.uid | default(omit) }}'
+    umask: '{{ item.umask | default(omit) }}'
     update_password: '{{ item.update_password | default(omit) }}'  # default: always
   loop: '{{ delta_users }}'
 
@@ -55,24 +58,25 @@
 - name: Configure authorized key(s)
   ansible.posix.authorized_key:
     comment: '{{ item.comment | default(omit) }}'
-    exclusive: '{{ item.exclusive | default(omit) }}'  # default: no
-    follow: '{{ item.follow | default(omit) }}'  # default: no
+    exclusive: '{{ item.exclusive | default(omit) }}'  # default: false
+    follow: '{{ item.follow | default(omit) }}'  # default: false
     key: '{{ item.key }}'  # required!!!
     key_options: '{{ item.key_options | default(omit) }}'
-    manage_dir: '{{ item.manage_dir | default(omit) }}'  # default: yes
+    manage_dir: '{{ item.manage_dir | default(omit) }}'  # default: true
     path: '{{ item.path | default(omit) }}'  # default: (homedir)+/.ssh/authorized_keys
     state: '{{ item.state | default(omit) }}'  # default: present
     user: '{{ item.user }}'  # required!!!
-    validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: yes
+    validate_certs: '{{ item.validate_certs | default(omit) }}'  # default: true
   loop: '{{ delta_authorized_keys }}'
 
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/blockinfile_module.html
 - name: Configure sudoer(s)
   ansible.builtin.blockinfile:
+    append_newline: '{{ item.append_newline | default(omit) }}'  # default: false
     attributes: '{{ item.attributes | default(omit) }}'
-    backup: '{{ item.backup | default(omit) }}'  # default: no
+    backup: '{{ item.backup | default(omit) }}'  # default: false
     block: '{{ item.block | default(omit) }}'  # default: empty string
-    create: '{{ item.create | default(omit) }}'  # default: no
+    create: '{{ item.create | default(omit) }}'  # default: false
     group: '{{ item.group | default(omit) }}'
     insertafter: '{{ item.insertafter | default(omit) }}'  # default: EOF
     insertbefore: '{{ item.insertbefore | default(omit) }}'  # default: BOF???
@@ -82,12 +86,13 @@
     mode: '{{ item.mode | default(omit) }}'
     owner: '{{ item.owner | default(omit) }}'
     path: '{{ item.path }}'  # required!!!
-    selevel: '{{ item.selevel | default(omit) }}'  # default: s0
+    prepend_newline: '{{ item.prepend_newline | default(omit) }}'  # default: false
+    selevel: '{{ item.selevel | default(omit) }}'
     serole: '{{ item.serole | default(omit) }}'
     setype: '{{ item.setype | default(omit) }}'
     seuser: '{{ item.seuser | default(omit) }}'
     state: '{{ item.state | default(omit) }}'  # default: present
-    unsafe_writes: '{{ item.unsafe_writes | default(omit) }}'  # default: no
+    unsafe_writes: '{{ item.unsafe_writes | default(omit) }}'  # default: false
     validate: '{{ item.validate | default(omit) }}'
   loop: '{{ delta_sudoers }}'
 
